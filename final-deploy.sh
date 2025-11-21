@@ -9,7 +9,7 @@ echo "=========================================="
 echo ""
 
 # Navigate to project root
-cd "$(dirname "$0")"
+cd /workspaces/-Buildprogemini-
 
 # Colors
 GREEN='\033[0;32m'
@@ -35,11 +35,19 @@ echo ""
 # Step 3: Build backend
 echo -e "${BLUE}🔧 Step 3: Building backend${NC}"
 echo "---------------------------"
+echo "Cleaning backend cache..."
+rm -rf backend/dist
+rm -rf backend/node_modules/.cache
 cd backend
 npm run build
+
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}✓ Backend built successfully${NC}"
+else
+    echo -e "${RED}✗ Backend build failed!${NC}"
+    exit 1
+fi
 cd ..
-echo -e "${GREEN}✓ Backend built successfully${NC}"
-echo ""
 
 # Step 4: Commit changes
 echo -e "${BLUE}📝 Step 4: Committing changes${NC}"

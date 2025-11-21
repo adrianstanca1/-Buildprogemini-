@@ -1,52 +1,22 @@
 {
-    "version": 2,
-    "buildCommand": "npm run build && cd backend && npm install && npm run build",
+    "buildCommand": "npm run vercel-build",
     "outputDirectory": "dist",
-    "devCommand": "npm run dev",
-    "installCommand": "npm install && cd backend && npm install",
     "framework": "vite",
-    "builds": [
+    "rewrites": [
         {
-            "src": "package.json",
-            "use": "@vercel/static-build",
-            "config": {
-                "distDir": "dist"
-            }
-        },
-        {
-            "src": "backend/src/server.ts",
-            "use": "@vercel/node",
-            "config": {
-                "includeFiles": [
-                    "backend/src/**"
-                ]
-            }
+            "source": "/:path*",
+            "destination": "/index.html"
         }
     ],
-    "routes": [
+    "headers": [
         {
-            "src": "/api/(.*)",
-            "dest": "/backend/src/server.ts"
-        },
-        {
-            "src": "/assets/(.*)",
-            "headers": {
-                "cache-control": "public, max-age=31536000, immutable"
-            },
-            "dest": "/assets/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/index.html"
+            "source": "/assets/:path*",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
         }
-    ],
-    "env": {
-        "NODE_ENV": "production"
-    },
-    "github": {
-        "enabled": true,
-        "autoAlias": true,
-        "autoJobCancelation": true,
-        "silent": false
-    }
+    ]
 }
