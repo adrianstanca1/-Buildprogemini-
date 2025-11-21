@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { HardHat, Check, ArrowRight } from 'lucide-react';
 import { Page, UserRole } from '../types';
 import { useAuth } from '../contexts/AuthContext';
@@ -9,18 +8,27 @@ interface LoginViewProps {
 }
 
 const LoginView: React.FC<LoginViewProps> = ({ setPage }) => {
-  const { login } = useAuth();
+  const { login, error } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleDemoLogin = (role: UserRole) => {
-    login(role);
-    setPage(Page.IMAGINE);
+  const handleDemoLogin = async (email: string, password: string) => {
+    try {
+      setIsLoading(true);
+      await login({ email, password });
+      setPage(Page.IMAGINE);
+    } catch (err) {
+      console.error('Login failed:', err);
+      // Error is handled by AuthContext
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const demoAccounts = [
-    { label: 'Principal Admin', role: UserRole.SUPER_ADMIN, email: 'john@buildcorp.com' },
-    { label: 'Company Admin', role: UserRole.COMPANY_ADMIN, email: 'sarah@buildcorp.com' },
-    { label: 'Supervisor', role: UserRole.SUPERVISOR, email: 'mike@buildcorp.com' },
-    { label: 'Operative', role: UserRole.OPERATIVE, email: 'david@buildcorp.com' },
+    { label: 'Principal Admin', role: UserRole.SUPER_ADMIN, email: 'john@buildcorp.com', password: 'demo123' },
+    { label: 'Company Admin', role: UserRole.COMPANY_ADMIN, email: 'sarah@buildcorp.com', password: 'demo123' },
+    { label: 'Supervisor', role: UserRole.SUPERVISOR, email: 'mike@buildcorp.com', password: 'demo123' },
+    { label: 'Operative', role: UserRole.OPERATIVE, email: 'david@buildcorp.com', password: 'demo123' },
   ];
 
   return (
@@ -66,12 +74,18 @@ const LoginView: React.FC<LoginViewProps> = ({ setPage }) => {
 
           <div className="bg-zinc-50 p-6 rounded-xl border border-zinc-100 mb-8">
             <p className="text-sm font-semibold text-zinc-900 mb-4">Select Role to Login (Demo)</p>
+            {error && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                {error}
+              </div>
+            )}
             <div className="space-y-3">
               {demoAccounts.map((account) => (
                 <button 
                   key={account.email}
-                  onClick={() => handleDemoLogin(account.role)}
-                  className="w-full flex items-center justify-between text-xs group hover:bg-white p-3 rounded border border-transparent hover:border-zinc-200 transition-all shadow-sm hover:shadow"
+                  onClick={() => handleDemoLogin(account.email, account.password)}
+                  disabled={isLoading}
+                  className="w-full flex items-center justify-between text-xs group hover:bg-white p-3 rounded border border-transparent hover:border-zinc-200 transition-all shadow-sm hover:shadow disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <div className="flex flex-col items-start">
                     <span className="font-bold text-zinc-700 text-sm">{account.label}</span>

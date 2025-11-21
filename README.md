@@ -12,7 +12,18 @@ A comprehensive full-stack construction management platform with AI-powered feat
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue)](https://www.postgresql.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## 📋 Overview
+## � One-Click Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/adrianstanca1/-Buildprogemini-&env=DATABASE_URL,JWT_SECRET,NODE_ENV&envDescription=Required%20environment%20variables&envLink=https://github.com/adrianstanca1/-Buildprogemini-/blob/main/VERCEL_AUTO_DEPLOY.md)
+
+**After clicking deploy:**
+
+1. Create a Supabase database at <https://supabase.com>
+2. Add environment variables in Vercel
+3. Run database migrations
+4. Done! See [VERCEL_AUTO_DEPLOY.md](VERCEL_AUTO_DEPLOY.md) for details
+
+## �📋 Overview
 
 BuildPro is a production-ready construction management platform featuring:
 

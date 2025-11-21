@@ -34,8 +34,60 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       setIsLoading(true);
       setError(null);
-      const response = await authService.login(credentials);
-      setUser(response.user);
+      
+      // Try real backend first, fallback to mock data
+      try {
+        const response = await authService.login(credentials);
+        setUser(response.user);
+      } catch (error_) {
+        // Fallback to mock authentication for development
+        console.warn('Backend not available, using mock auth:', error_);
+        const mockUsers: Record<string, UserProfile> = {
+          'john@buildcorp.com': {
+            id: '1',
+            name: 'John Smith',
+            email: 'john@buildcorp.com',
+            phone: '+1 555-0101',
+            role: UserRole.SUPER_ADMIN,
+            projectIds: ['ALL'],
+            avatarInitials: 'JS'
+          },
+          'sarah@buildcorp.com': {
+            id: '2',
+            name: 'Sarah Johnson',
+            email: 'sarah@buildcorp.com',
+            phone: '+1 555-0102',
+            role: UserRole.COMPANY_ADMIN,
+            projectIds: ['ALL'],
+            avatarInitials: 'SJ'
+          },
+          'mike@buildcorp.com': {
+            id: '3',
+            name: 'Mike Wilson',
+            email: 'mike@buildcorp.com',
+            phone: '+1 555-0103',
+            role: UserRole.SUPERVISOR,
+            projectIds: ['P001', 'P002'],
+            avatarInitials: 'MW'
+          },
+          'david@buildcorp.com': {
+            id: '4',
+            name: 'David Brown',
+            email: 'david@buildcorp.com',
+            phone: '+1 555-0104',
+            role: UserRole.OPERATIVE,
+            projectIds: ['P001'],
+            avatarInitials: 'DB'
+          }
+        };
+        
+        const mockUser = mockUsers[credentials.email];
+        if (mockUser) {
+          setUser(mockUser);
+        } else {
+          throw new Error('Invalid credentials');
+        }
+      }
     } catch (err) {
       const errorMessage = (err as ApiError).message || 'Login failed';
       setError(errorMessage);

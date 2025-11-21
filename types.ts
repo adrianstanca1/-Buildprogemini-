@@ -182,6 +182,9 @@ export interface UserProfile {
   avatarUrl?: string;
 }
 
+// Alias for compatibility with backend types
+export type User = UserProfile;
+
 export interface Message {
   id: string;
   role: 'user' | 'model';

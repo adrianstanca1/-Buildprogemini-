@@ -1,12 +1,14 @@
 {
-  "name": "copy-of-build-pro-app",
+  "name": "buildpro-construction-management",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Full-stack construction management platform with AI integration",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "vercel-build": "npm run build && cd backend && npm install && npm run build"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",
