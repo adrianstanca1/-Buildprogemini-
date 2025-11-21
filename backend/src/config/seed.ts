@@ -8,7 +8,7 @@ const seedData = async () => {
 
     // Check if data already exists
     const projectCheck = await pool.query('SELECT COUNT(*) FROM projects');
-    if (parseInt(projectCheck.rows[0].count) > 0) {
+    if (Number.parseInt(projectCheck.rows[0].count) > 0) {
       logger.info('Database already seeded, skipping...');
       return;
     }
@@ -114,12 +114,11 @@ const seedData = async () => {
 };
 
 // Run seeding
-seedData()
-  .then(() => {
-    logger.info('Seeding completed successfully');
-    process.exit(0);
-  })
-  .catch((error) => {
-    logger.error('Seeding failed:', error);
-    process.exit(1);
-  });
+try {
+  await seedData();
+  logger.info('Seeding completed successfully');
+  process.exit(0);
+} catch (error) {
+  logger.error('Seeding failed:', error);
+  process.exit(1);
+}

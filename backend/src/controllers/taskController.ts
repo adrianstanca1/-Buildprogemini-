@@ -14,6 +14,7 @@ export class TaskController {
 
       res.json({ success: true, data: tasks });
     } catch (error) {
+      if (error instanceof AppError) throw error;
       throw new AppError('Failed to fetch tasks', 500);
     }
   }
@@ -44,6 +45,7 @@ export class TaskController {
       const task = await TaskModel.create(taskData);
       res.status(201).json({ success: true, data: task });
     } catch (error) {
+      if (error instanceof AppError) throw error;
       throw new AppError('Failed to create task', 500);
     }
   }

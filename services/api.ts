@@ -12,7 +12,7 @@ interface ApiError {
 }
 
 class ApiClient {
-  private baseURL: string;
+  private readonly baseURL: string;
   private token: string | null = null;
 
   constructor(baseURL: string) {
@@ -74,10 +74,7 @@ class ApiClient {
         throw error;
       }
       
-      throw {
-        message: 'Network error. Please check your connection.',
-        statusCode: 0,
-      } as ApiError;
+      throw new Error('Network error. Please check your connection.');
     }
   }
 

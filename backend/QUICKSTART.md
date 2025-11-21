@@ -27,12 +27,14 @@ npm install
 ### 3. Set Up Environment
 
 ```bash
-cp .env.example .env
-```
+5. Set up environment variables:
+   ```bash
+   cp .env.example .env
+   ```
 
 Edit `.env` if needed (default settings work with docker-compose):
 
-```
+```env
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=buildpro

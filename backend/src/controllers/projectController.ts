@@ -9,6 +9,7 @@ export class ProjectController {
       const projects = await ProjectModel.findAll();
       res.json({ success: true, data: projects });
     } catch (error) {
+      if (error instanceof AppError) throw error;
       throw new AppError('Failed to fetch projects', 500);
     }
   }
@@ -39,6 +40,7 @@ export class ProjectController {
       const project = await ProjectModel.create(projectData);
       res.status(201).json({ success: true, data: project });
     } catch (error) {
+      if (error instanceof AppError) throw error;
       throw new AppError('Failed to create project', 500);
     }
   }

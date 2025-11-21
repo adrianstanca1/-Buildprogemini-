@@ -161,12 +161,11 @@ const createTables = async () => {
 };
 
 // Run migration
-createTables()
-  .then(() => {
-    logger.info('Migration completed successfully');
-    process.exit(0);
-  })
-  .catch((error) => {
-    logger.error('Migration failed:', error);
-    process.exit(1);
-  });
+try {
+  await createTables();
+  logger.info('Migration completed successfully');
+  process.exit(0);
+} catch (error) {
+  logger.error('Migration failed:', error);
+  process.exit(1);
+}

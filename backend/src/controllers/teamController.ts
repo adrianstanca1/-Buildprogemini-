@@ -14,6 +14,7 @@ export class TeamController {
 
       res.json({ success: true, data: members });
     } catch (error) {
+      if (error instanceof AppError) throw error;
       throw new AppError('Failed to fetch team members', 500);
     }
   }
@@ -44,6 +45,7 @@ export class TeamController {
       const member = await TeamMemberModel.create(memberData);
       res.status(201).json({ success: true, data: member });
     } catch (error) {
+      if (error instanceof AppError) throw error;
       throw new AppError('Failed to create team member', 500);
     }
   }
