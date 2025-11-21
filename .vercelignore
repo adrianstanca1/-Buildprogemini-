@@ -1,0 +1,10 @@
+node_modules
+.git
+.vscode
+backend/node_modules
+backend/dist
+backend/logs
+backend/.env
+buildpro
+*.log
+.DS_Store

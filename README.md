@@ -221,14 +221,31 @@ Base URL: `http://localhost:3001/api/v1`
 
 ## 🚀 Deployment
 
-### Frontend
+### Frontend - Vercel (Recommended)
 
-- Vercel (Recommended)
+**Quick Deploy:**
+
+```bash
+# Option 1: One-command deployment
+./build-and-deploy.sh
+
+# Option 2: Vercel CLI
+npm install -g vercel
+vercel --prod
+
+# Option 3: GitHub Integration (easiest)
+# Push to GitHub and import at vercel.com/new
+```
+
+**Detailed Guide**: See [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md)
+
+**Other Options:**
+
 - Netlify
 - GitHub Pages
 - AWS S3 + CloudFront
 
-### Backend
+### Backend - Node.js Hosting
 
 - Railway.app (Recommended)
 - Render.com
@@ -236,7 +253,7 @@ Base URL: `http://localhost:3001/api/v1`
 - AWS EC2
 - Docker
 
-See [Deployment Guide](backend/DEPLOYMENT.md) for detailed instructions.
+See [Backend Deployment Guide](backend/DEPLOYMENT.md) for detailed instructions.
 
 ## 🔒 Security Features
 
