@@ -4,16 +4,11 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "module": "ESNext",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "allowJs": true,
@@ -23,5 +18,18 @@
     "strict": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "types.ts",
+    "App.tsx",
+    "index.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "backend",
+    "buildpro"
+  ]
 }
