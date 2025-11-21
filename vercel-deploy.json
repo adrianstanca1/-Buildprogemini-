@@ -1,0 +1,42 @@
+{
+  "name": "buildpro-construction-management",
+  "version": 2,
+  "public": false,
+  "github": {
+    "enabled": true,
+    "autoAlias": true,
+    "autoJobCancelation": true
+  },
+  "env": {
+    "DATABASE_URL": "postgresql://postgres.zpbuvuxpfemldsknerew:%20Cumparavinde1%5D@aws-0-us-east-1.pooler.supabase.com:6543/postgres",
+    "NODE_ENV": "production",
+    "JWT_SECRET": "buildpro_jwt_secret_2025_production_key_secure_random_string",
+    "CORS_ORIGIN": "@buildpro-url"
+  },
+  "build": {
+    "env": {
+      "DATABASE_URL": "postgresql://postgres.zpbuvuxpfemldsknerew:%20Cumparavinde1%5D@aws-0-us-east-1.pooler.supabase.com:6543/postgres",
+      "NODE_ENV": "production",
+      "JWT_SECRET": "buildpro_jwt_secret_2025_production_key_secure_random_string"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/src/server.ts"
+    },
+    {
+      "src": "/assets/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
