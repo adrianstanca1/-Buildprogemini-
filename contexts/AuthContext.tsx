@@ -1,12 +1,18 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { UserProfile, UserRole } from '../types';
+import { authService, type LoginCredentials, type RegisterData } from '../services/authService';
+import type { ApiError } from '../services/api';
 
 interface AuthContextType {
   user: UserProfile | null;
-  login: (role: UserRole) => void;
+  login: (credentials: LoginCredentials) => Promise<void>;
+  register: (data: RegisterData) => Promise<void>;
   logout: () => void;
   hasPermission: (allowedRoles: UserRole[]) => boolean;
   addProjectId: (id: string) => void;
+  isLoading: boolean;
+  error: string | null;
+  clearError: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -92,10 +98,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const addProjectId = (projectId: string) => {
     if (user && user.projectIds && !user.projectIds.includes(projectId) && !user.projectIds.includes('ALL')) {
-        setUser({
-            ...user,
-            projectIds: [...user.projectIds, projectId]
-        });
+      setUser({
+        ...user,
+        projectIds: [...user.projectIds, projectId]
+      });
     }
   };
 
