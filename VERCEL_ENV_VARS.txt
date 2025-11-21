@@ -1,0 +1,76 @@
+VERCEL ENVIRONMENT VARIABLES - COPY & PASTE
+=====================================================
+
+Copy each variable below to Vercel Dashboard:
+Settings → Environment Variables → Add
+
+-----------------------------------------------------
+Variable 1 of 4:
+-----------------------------------------------------
+Name: DATABASE_UDATABASE_URL
+postgresql://postgres:%20Cumparavinde1%5D@db.zpbuvuxpfemldsknerew.supabase.co:5432/postgres
+
+NODE_ENV
+production
+
+JWT_SECRET
+buildpro_jwt_secret_2025_production_key_secure_random_string
+
+CORS_ORIGIN
+https://your-app.vercel.appRL
+Value: postgresql://postgres:%20Cumparavinde1%5D@db.zpbuvuxpfemldsknerew.supabase.co:5432/postgres
+Environments: ✓ Production  ✓ Preview  ✓ Development
+
+-----------------------------------------------------
+Variable 2 of 4:
+-----------------------------------------------------
+Name: NODE_ENV
+Value: production
+Environments: ✓ Production  ✓ Preview  ✓ Development
+
+-----------------------------------------------------
+Variable 3 of 4:
+-----------------------------------------------------
+Name: JWT_SECRET
+Value: buildpro_jwt_secret_2025_production_key_secure_random_string
+Environments: ✓ Production  ✓ Preview  ✓ Development
+
+-----------------------------------------------------
+Variable 4 of 4:
+-----------------------------------------------------
+Name: CORS_ORIGIN
+Value: https://your-app.vercel.app
+Environments: ✓ Production  ✓ Preview  ✓ Development
+
+⚠️  IMPORTANT: Update CORS_ORIGIN after first deployment!
+
+-----------------------------------------------------
+OPTIONAL (for AI features):
+-----------------------------------------------------
+Name: GEMINI_API_KEY
+Value: your_gemini_api_key_here
+Environments: ✓ Production  ✓ Preview  ✓ Development
+
+=====================================================
+
+DEPLOYMENT STEPS:
+1. Go to: https://vercel.com/new
+2. Import repository: adrianstanca1/-Buildprogemini-
+3. Framework: Vite (auto-detected)
+4. Click "Environment Variables"
+5. Add all 4 variables above (copy name and value)
+6. Click "Deploy"
+7. Wait for build to complete (~2-3 minutes)
+8. Copy your Vercel URL
+9. Update CORS_ORIGIN with your actual URL
+10. Redeploy from Deployments tab
+
+=====================================================
+
+TEST ACCOUNTS (after deployment):
+admin@buildpro.com / Admin123!
+company@buildpro.com / Company123!
+supervisor@buildpro.com / Super123!
+worker@buildpro.com / Work123!
+
+=====================================================

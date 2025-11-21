@@ -35,16 +35,16 @@ In Vercel Dashboard → Settings → Environment Variables, add:
 
 ```bash
 # Database (Get from Supabase - see Step 3)
-DATABASE_URL=postgresql://postgres:[PASSWORD]@db.[PROJECT].supabase.co:5432/postgres
+DATABASE_URL=postgresql://postgres:%20Cumparavinde1%5D@db.zpbuvuxpfemldsknerew.supabase.co:5432/postgres
 
 # Security (Generate below)
-JWT_SECRET=[paste generated secret]
+JWT_SECRET=buildpro_jwt_secret_2025_production_key_secure_random_string
 
 # Environment
 NODE_ENV=production
 
 # CORS (Update after first deploy)
-CORS_ORIGIN=https://your-project.vercel.app
+CORS_ORIGIN=https://your-app.vercel.app
 
 # API URL (Update after first deploy)
 VITE_API_URL=https://your-project.vercel.app/api
