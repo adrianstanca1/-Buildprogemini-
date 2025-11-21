@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Map as MapIcon, Layers, Upload, Crosshair, Users, Navigation, 
-  FileText, Loader2, ZoomIn, ZoomOut, Eye, MoreVertical, CheckCircle2,
-  Cpu, Scan, FileCode, AlertCircle, XCircle, Maximize, Grid, Ruler,
-  FolderOpen, Clock, File, ChevronRight, X, Image as ImageIcon, Search, Filter, Briefcase, RefreshCw, ShieldCheck,
-  PlusSquare, PenTool, ShieldAlert, Sparkles, MousePointer2, ChevronDown, UserCircle
+  FileText, Loader2, ZoomIn, ZoomOut, Eye, CheckCircle2,
+  Cpu, FileCode, XCircle, Maximize, Grid,
+  FolderOpen, Clock, File, ChevronRight, X, Search, Briefcase, RefreshCw,
+  PlusSquare, PenTool, Sparkles, ChevronDown
 } from 'lucide-react';
 import * as L from 'leaflet';
 import { useProjects } from '../contexts/ProjectContext';
@@ -402,8 +402,9 @@ const LiveProjectMapView: React.FC = () => {
                        
                        <div className="space-y-4">
                            <div>
-                               <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Zone Label</label>
-                               <input 
+                               <label htmlFor="zone-label" className="block text-xs font-bold text-zinc-500 uppercase mb-1">Zone Label</label>
+                               <input
+                                 id="zone-label" 
                                  type="text" 
                                  value={newZoneData.label}
                                  onChange={e => setNewZoneData({...newZoneData, label: e.target.value})}
@@ -414,12 +415,12 @@ const LiveProjectMapView: React.FC = () => {
                            </div>
                            
                            <div>
-                               <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Zone Type</label>
-                               <div className="flex gap-2">
-                                   {['danger', 'warning', 'info', 'success'].map(type => (
+                               <label htmlFor="zone-type-group" className="block text-xs font-bold text-zinc-500 uppercase mb-1">Zone Type</label>
+                               <div id="zone-type-group" className="flex gap-2" role="group" aria-label="Zone type selection">
+                                   {(['danger', 'warning', 'info', 'success'] as const).map(type => (
                                        <button
                                           key={type}
-                                          onClick={() => setNewZoneData({...newZoneData, type: type as any})}
+                                          onClick={() => setNewZoneData({...newZoneData, type: type})}
                                           className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase border transition-all ${
                                               newZoneData.type === type 
                                               ? (type === 'danger' ? 'bg-red-100 border-red-500 text-red-700 shadow-sm' : 
@@ -455,16 +456,17 @@ const LiveProjectMapView: React.FC = () => {
                            </div>
 
                            <div>
-                               <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Alert Trigger</label>
+                               <label htmlFor="alert-trigger" className="block text-xs font-bold text-zinc-500 uppercase mb-1">Alert Trigger</label>
                                <div className="relative">
-                                   <select 
+                                   <select
+                                     id="alert-trigger"
                                      value={newZoneData.trigger}
                                      onChange={e => setNewZoneData({...newZoneData, trigger: e.target.value})}
                                      className="w-full p-3 border border-zinc-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0f5c82] outline-none bg-white appearance-none cursor-pointer"
                                    >
                                        <option value="Entry">On Entry</option>
                                        <option value="Exit">On Exit</option>
-                                       <option value="Loitering">Loitering (>5 mins)</option>
+                                       <option value="Loitering">Loitering (&gt;5 mins)</option>
                                        <option value="Capacity">Capacity Limit Exceeded</option>
                                    </select>
                                    <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 rotate-90" size={16} />
