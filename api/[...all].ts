@@ -1,11 +1,8 @@
 // Vercel Serverless Function - API Proxy
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import app from '../backend/src/server.js';
 
-// This will be replaced by the actual backend when deployed
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Import the Express app
-  const app = await import('../backend/src/server');
-  
-  // Handle the request
-  return app.default(req, res);
+  // Let Express handle the request
+  return app(req, res);
 }
