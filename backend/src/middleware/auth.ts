@@ -9,7 +9,7 @@ export interface AuthRequest extends Request {
   };
 }
 
-export const authenticate = (req: AuthRequest, res: Response, next: NextFunction) => {
+export const authenticate = (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
     
@@ -18,7 +18,7 @@ export const authenticate = (req: AuthRequest, res: Response, next: NextFunction
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret') as any;
-    req.user = decoded;
+    (req as AuthRequest).user = decoded;
     next();
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Invalid token';
@@ -27,12 +27,13 @@ export const authenticate = (req: AuthRequest, res: Response, next: NextFunction
 };
 
 export const authorize = (...roles: string[]) => {
-  return (req: AuthRequest, res: Response, next: NextFunction) => {
-    if (!req.user) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const authReq = req as AuthRequest;
+    if (!authReq.user) {
       return res.status(401).json({ error: 'Not authenticated' });
     }
 
-    if (!roles.includes(req.user.role)) {
+    if (!roles.includes(authReq.user.role)) {
       return res.status(403).json({ error: 'Insufficient permissions' });
     }
 
