@@ -22,23 +22,36 @@ A comprehensive RESTful API for the BuildPro Construction Management Platform bu
 
 ## 🛠️ Installation
 
-1. Navigate to the backend directory:
+**For detailed integration instructions, see [INTEGRATION_GUIDE.md](./INTEGRATION_GUIDE.md)**
+
+### Quick Start
+
+Use the automated setup script:
 
 ```bash
-cd backend
+chmod +x setup-backend.sh
+./setup-backend.sh
 ```
+
+### Manual Setup
+
+1. Navigate to the backend directory:
+
+   ```bash
+   cd backend
+   ```
 
 2. Install dependencies:
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 3. Create a `.env` file based on `.env.example`:
 
-```bash
-cp .env.example .env
-```
+   ```bash
+   cp .env.example .env
+   ```
 
 4. Configure your environment variables in `.env`:
 
@@ -62,21 +75,21 @@ CORS_ORIGIN=http://localhost:5173
 
 1. Create a PostgreSQL database:
 
-```bash
-createdb buildpro
-```
+   ```bash
+   createdb buildpro
+   ```
 
 2. Run migrations to create tables:
 
-```bash
-npm run migrate
-```
+   ```bash
+   npm run migrate
+   ```
 
 3. (Optional) Seed the database with sample data:
 
-```bash
-npm run seed
-```
+   ```bash
+   npm run seed
+   ```
 
 ## 🏃 Running the Server
 
@@ -176,7 +189,7 @@ curl -X GET http://localhost:3001/api/v1/projects \
 
 ## 🏗️ Project Structure
 
-```
+```text
 backend/
 ├── src/
 │   ├── config/
@@ -231,19 +244,19 @@ npm test
 
 ## 📊 Database Schema
 
-### Users
+### Users Table
 
 - id, name, email, password_hash, phone, role, company_id, avatar_initials, avatar_url
 
-### Projects
+### Projects Table
 
 - id, name, code, description, location, type, status, health, progress, budget, spent, dates, manager, image, team_size, task metrics
 
-### Tasks
+### Tasks Table
 
 - id, title, project_id, status, priority, assignee info, due_date, description
 
-### Team Members
+### Team Members Table
 
 - id, name, initials, role, status, project_id, contact info, bio, skills, performance metrics
 
