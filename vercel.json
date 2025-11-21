@@ -1,22 +1,19 @@
 {
-    "buildCommand": "npm run vercel-build",
+    "version": 2,
+    "buildCommand": "npm run build",
     "outputDirectory": "dist",
-    "framework": "vite",
-    "rewrites": [
+    "framework": null,
+    "routes": [
         {
-            "source": "/:path*",
-            "destination": "/index.html"
-        }
-    ],
-    "headers": [
+            "src": "/assets/(.*)",
+            "headers": {
+                "cache-control": "public, max-age=31536000, immutable"
+            },
+            "dest": "/assets/$1"
+        },
         {
-            "source": "/assets/:path*",
-            "headers": [
-                {
-                    "key": "Cache-Control",
-                    "value": "public, max-age=31536000, immutable"
-                }
-            ]
+            "src": "/(.*)",
+            "dest": "/index.html"
         }
     ]
 }
