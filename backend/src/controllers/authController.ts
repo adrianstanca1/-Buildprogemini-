@@ -32,10 +32,12 @@ export class AuthController {
         avatar_initials,
       });
 
+      const expiresIn = process.env.JWT_EXPIRES_IN || '7d';
+      // @ts-expect-error - StringValue type issue with ms package
       const token = jwt.sign(
         { id: user.id, email: user.email, role: user.role },
         process.env.JWT_SECRET || 'secret',
-        { expiresIn: (process.env.JWT_EXPIRES_IN || '7d') as string }
+        { expiresIn }
       );
 
       res.status(201).json({
@@ -62,10 +64,12 @@ export class AuthController {
         throw new AppError('User not found', 404);
       }
 
+      const expiresIn = process.env.JWT_EXPIRES_IN || '7d';
+      // @ts-expect-error - StringValue type issue with ms package
       const token = jwt.sign(
         { id: user.id, email: user.email, role: user.role },
         process.env.JWT_SECRET || 'secret',
-        { expiresIn: (process.env.JWT_EXPIRES_IN || '7d') as string }
+        { expiresIn }
       );
 
       const { password_hash, ...userWithoutPassword } = user;
