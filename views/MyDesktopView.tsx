@@ -601,14 +601,25 @@ const MyDesktopView: React.FC<MyDesktopViewProps> = ({ installedApps, setPage })
     const [display, setDisplay] = useState('0');
     const [equation, setEquation] = useState('');
 
+    const safeEval = (expr: string): number => {
+      try {
+        // Remove any non-numeric, non-operator characters for safety
+        const sanitized = expr.replace(/[^0-9+\-*/.()]/g, '');
+        // Use Function constructor as a safer alternative to eval
+        return new Function(`'use strict'; return (${sanitized})`)();
+      } catch {
+        throw new Error('Invalid expression');
+      }
+    };
+
     const handleBtn = (val: string) => {
       if (val === 'C') {
         setDisplay('0');
         setEquation('');
       } else if (val === '=') {
         try {
-          // eslint-disable-next-line no-eval
-          setDisplay(eval(equation).toString());
+          const result = safeEval(equation);
+          setDisplay(result.toString());
           setEquation('');
         } catch {
           setDisplay('Error');
